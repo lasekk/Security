@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+import os
+import datetime
+
+def print_msg(msg):
+    print("\nContents from message file:")
+    for item in msg:
+        print(item)
+
+#set up working directory, file name, full file path
+working_dir = 'Automation course\Documents'
+file_name = 'message.txt'
+my_path = os.path.join('C:\\Users\plaskows\PycharmProjects\Security', working_dir)
+my_file = os.path.join('C:\\Users\plaskows\PycharmProjects\Security', working_dir, file_name)
+my_files = os.listdir(my_path)
+print("\n\n")
+for filename in my_files:
+    print(filename)
+
+#open file object in readonly mode and print it using readlines()
+message_file = open(my_file, 'r')
+print("\nContents from message file:".format(message_file.readlines()))
+input("\nPress Enter to continue")
+message_file.close()
+
+#open file object for appending ('w' will overwrite the existing file)
+#open file in 'a' append mode
+message_file = open(my_file, 'a')
+message_file.write("\nFiles backed up: " + str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M")))
+message_file.close()
+message_file = open(my_file, 'r')
+messages = message_file.readlines()
+#print("\nContents from message file:".format(message_file.readlines()))
+message_file.close()
+print_msg(messages)
+input("\nPress Enter to continue")
